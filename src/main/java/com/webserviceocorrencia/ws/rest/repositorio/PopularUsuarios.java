@@ -26,7 +26,7 @@ public class PopularUsuarios {
 			cad.setSenha("1234");
 			cad.setCpf("1121298710");
 			cad.setTelefone("41622246");
-			cad.setDataDeNascimento(df.parse("22/03/1995"));
+			cad.setDataDeNascimento("22/03/1995");
 			cad.setCep("06433210");
 			cad.setRua("Rua Joaquim de Abreu");
 			cad.setNumero("56");
@@ -56,13 +56,13 @@ public class PopularUsuarios {
 		   catch (MySQLIntegrityConstraintViolationException e) 
 
 			{
-			   System.out.println(cad.getcpf() + "CPF JÁ CADASTRADO ");
+			   System.out.println(cad.getCpf() + "CPF JÁ CADASTRADO ");
 			}
 		 
 			catch (org.hibernate.exception.ConstraintViolationException  e) 
 			
 			{
-			   System.out.println(cad.getcpf() + "CPF JÁ CADASTRADO ");
+			   System.out.println(cad.getCpf() + "CPF JÁ CADASTRADO ");
 			}
 
 		

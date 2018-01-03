@@ -25,7 +25,7 @@ public class PopularOcorrencia {
 		cad.setSenha("1234");
 		cad.setCpf("1121298710");
 		cad.setTelefone("41622246");
-		cad.setDataDeNascimento(df.parse("22/03/1995"));
+		cad.setDataDeNascimento("22/03/1995");
 		cad.setCep("06433210");
 		cad.setRua("Rua Joaquim de Abreu");
 		cad.setNumero("56");
@@ -42,7 +42,7 @@ public class PopularOcorrencia {
 		MDOcorrencia ocorrencia  = new MDOcorrencia();
 		
 		ocorrencia.setTipo("Assalto");
-		ocorrencia.setData(df.parse("20/11/2017"));
+		ocorrencia.setData(("20/11/2017"));
 		ocorrencia.setDescricao("Assalto a mão armada");
 		ocorrencia.setRua("Rua dos Hornet");
 		ocorrencia.setBairro("Jardim ALcantara");

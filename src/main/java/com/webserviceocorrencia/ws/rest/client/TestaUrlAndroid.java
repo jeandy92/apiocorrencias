@@ -34,7 +34,7 @@ public class TestaUrlAndroid {
 			//urlConnection.setRequestProperty("Accept", "application/vnd.github.v3+json");
 			//urlConnection.setRequestProperty("Contact-Me", "hathibelagal@example.com");
 			urlConnection.connect();
-			urlConnection.get
+			//urlConnection.get
 
 			
 			
