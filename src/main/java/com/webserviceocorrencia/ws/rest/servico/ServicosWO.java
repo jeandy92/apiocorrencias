@@ -49,7 +49,7 @@ public class ServicosWO {
 		 System.out.println(usu.getDataDeNascimento());
 		
 		 try {
-			if(dao.cadastraUsuario(usu)==1){
+			if( dao.cadastraUsuario(usu)==1){
 				 
 			    System.out.println("USUARIO CADASTRADO COM SUCESSO !!");
 			    return "USUARIO CADASTRADO COM SUCESSO !!";
