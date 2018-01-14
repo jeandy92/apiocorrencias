@@ -8,9 +8,13 @@ import org.codehaus.jettison.json.JSONObject;
 
 import java.util.ArrayList;
 
+import java.io.*;
+
+
 import java.util.List;
 import com.google.gson.Gson;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -209,9 +213,11 @@ try {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public String armazenarImagemPerfil(MDUsuario usuario){
+	public String armazenarImagemPerfil(MDUsuario usuario) throws IOException{
 	
 		EntityManager manager = new GeraTabelas().getEntityManager();
+		
+	
 		
 		System.out.println("STRING VINDA DO ANDROID " + usuario.getFt_perfil());
 		
@@ -222,14 +228,39 @@ try {
 		
 		usuario.setFt_perfil(imagemNova);
 		
+		
 		System.out.println("ID USUARIO "+usuario.getId());
 		
 		 try {
 				if(dao.alterarUsuario(usuario)==1){
-					 
+					
 				    System.out.println("USUARIO ALTERADO  COM SUCESSO !!");
+				    
+				    usuario = manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class)
+			        		.setParameter("cpf", usuario.getCpf()).getSingleResult();
+				      
+				        
+			            // Converting a Base64 String into Image byte array
+				        //String  stringencoder =  Base64.encodeBase64String(usuario.getFt_perfil().getBytes("UTF-8"));
+				        
+				        byte[] imageByteArray = Base64.decodeBase64(usuario.getFt_perfil());
+			            
+			            
+			            // Write a image byte array into file system
+			            FileOutputStream imageOutFile = new FileOutputStream("C:/Users/Jeanderson/Desktop/FTP-TESTE/"+usuario.getNome()+".png");
+			 
+			            imageOutFile.write(imageByteArray);
+			 
+			            imageOutFile.flush();
+			            imageOutFile.close();
+			 
+			            System.out.println("Imagem salva com suceso" );
+			        
+			     
+			    		 
 				    return "USUARIO ALTERADO  COM SUCESSO !!";
-				 } 
+				    }
+				 
 				else {
 				
 					System.out.println("ERRO AO ALTERAR USUARIO");
@@ -241,11 +272,15 @@ try {
 					 
 				}
 			
-		
+		 
 		return "USUARIO CADASTRADO COM SUCESSO !!";
+		
 	
 		
 	}	
+   
+	
+
 }
 
 
