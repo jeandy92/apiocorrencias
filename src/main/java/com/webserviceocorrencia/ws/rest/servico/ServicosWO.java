@@ -244,10 +244,14 @@ try {
 				        //String  stringencoder =  Base64.encodeBase64String(usuario.getFt_perfil().getBytes("UTF-8"));
 				        
 				        byte[] imageByteArray = Base64.decodeBase64(usuario.getFt_perfil());
-			            
+			 
+				        //Cria um novo diretório para cada usuário e armazena sua imagem de perfil
+				        File diretorio = new File("C:/Users/Jeanderson/Desktop/FTP-TESTE/"+usuario.getNome());
+			            diretorio.mkdir();
 			            
 			            // Write a image byte array into file system
-			            FileOutputStream imageOutFile = new FileOutputStream("C:/Users/Jeanderson/Desktop/FTP-TESTE/"+usuario.getNome()+".png");
+			            FileOutputStream imageOutFile = new FileOutputStream( diretorio + "/" + usuario.getNome()+ ".png");
+			 
 			 
 			            imageOutFile.write(imageByteArray);
 			 
