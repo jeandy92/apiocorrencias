@@ -1,0 +1,5 @@
+heroku war commands: (get help with heroku help war:COMMAND)
+
+ war:deploy WAR  Deploys a WAR file to Heroku.
+ war:run WAR     Runs a WAR file.
+
