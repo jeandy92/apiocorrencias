@@ -6,9 +6,9 @@ import java.text.SimpleDateFormat;
 
 import javax.persistence.EntityManager;
 
-import com.webserviceocorrencia.jpa.dao.OcorrenciaDAO;
-import com.webserviceocorrencia.jpa.entidades.MDOcorrencia;
-import com.webserviceocorrencia.jpa.entidades.MDUsuario;
+import com.webserviceocorrencia.ws.dao.OcorrenciaDAO;
+import com.webserviceocorrencia.ws.entidades.MDOcorrencia;
+import com.webserviceocorrencia.ws.entidades.MDUsuario;
 
 public class PopularOcorrencia {
 	
@@ -43,7 +43,7 @@ public class PopularOcorrencia {
 		
 		ocorrencia.setTipo("Assalto");
 		ocorrencia.setData(("20/11/2017"));
-		ocorrencia.setDescricao("Assalto a mão armada");
+		ocorrencia.setDescricao("Assalto a mï¿½o armada");
 		ocorrencia.setRua("Rua dos Hornet");
 		ocorrencia.setBairro("Jardim ALcantara");
 		ocorrencia.setCidade("Jandira");

@@ -1,0 +1,16 @@
+com\webserviceocorrencia\ws\controller\OcorrenciaController.class
+com\webserviceocorrencia\ws\rest\client\RestClientWO.class
+com\webserviceocorrencia\ws\rest\client\TestaUrlAndroid.class
+com\webserviceocorrencia\ws\rest\servico\OcorrenciaService.class
+com\webserviceocorrencia\ws\entidades\MDUsuario.class
+com\webserviceocorrencia\ws\controller\IndexController.class
+com\webserviceocorrencia\ws\dao\OcorrenciaDAO.class
+com\webserviceocorrencia\ws\entidades\MDOcorrencia.class
+com\webserviceocorrencia\ws\rest\servico\UsuarioService.class
+com\webserviceocorrencia\ws\Aplicacao.class
+com\webserviceocorrencia\ws\dao\UsuarioDAO.class
+com\webserviceocorrencia\ws\rest\modelo\Usuario.class
+com\webserviceocorrencia\ws\controller\UsuarioController.class
+com\webserviceocorrencia\ws\rest\repositorio\GeraTabelas.class
+com\webserviceocorrencia\ws\rest\repositorio\PopularOcorrencia.class
+com\webserviceocorrencia\ws\rest\repositorio\PopularUsuarios.class

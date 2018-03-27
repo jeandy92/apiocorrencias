@@ -8,8 +8,8 @@ import java.util.Date;
 import javax.persistence.EntityManager;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-import com.webserviceocorrencia.jpa.dao.UsuarioDAO;
-import com.webserviceocorrencia.jpa.entidades.MDUsuario;
+import com.webserviceocorrencia.ws.dao.UsuarioDAO;
+import com.webserviceocorrencia.ws.entidades.MDUsuario;
 import com.webserviceocorrencia.ws.rest.modelo.Usuario;
 
 public class PopularUsuarios {
@@ -47,7 +47,7 @@ public class PopularUsuarios {
 			} 
 			else
 			{
-				System.out.println("JÁ EXISTE ESTE CPF !!");
+				System.out.println("Jï¿½ EXISTE ESTE CPF !!");
 			}
 			
 			}
@@ -56,13 +56,13 @@ public class PopularUsuarios {
 		   catch (MySQLIntegrityConstraintViolationException e) 
 
 			{
-			   System.out.println(cad.getCpf() + "CPF JÁ CADASTRADO ");
+			   System.out.println(cad.getCpf() + "CPF Jï¿½ CADASTRADO ");
 			}
 		 
 			catch (org.hibernate.exception.ConstraintViolationException  e) 
 			
 			{
-			   System.out.println(cad.getCpf() + "CPF JÁ CADASTRADO ");
+			   System.out.println(cad.getCpf() + "CPF Jï¿½ CADASTRADO ");
 			}
 
 		

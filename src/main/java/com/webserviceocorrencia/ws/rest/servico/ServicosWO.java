@@ -1,4 +1,4 @@
-package com.webserviceocorrencia.ws.rest.servico;
+/*package com.webserviceocorrencia.ws.rest.servico;
 
 import javax.ws.rs.core.MediaType;
 
@@ -25,6 +25,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import org.springframework.stereotype.Service;
 
 import com.webserviceocorrencia.jpa.dao.OcorrenciaDAO;
 import com.webserviceocorrencia.jpa.dao.UsuarioDAO;
@@ -32,14 +33,14 @@ import com.webserviceocorrencia.jpa.entidades.MDOcorrencia;
 import com.webserviceocorrencia.jpa.entidades.MDUsuario;
 import com.webserviceocorrencia.ws.rest.repositorio.GeraTabelas;
 
-@Path("/WebserviceOcorrencia")
+@Service
 public class ServicosWO {
 
 	UsuarioDAO dao = new UsuarioDAO();
 	OcorrenciaDAO ocorrenciadao = new OcorrenciaDAO();
 	EntityManager manager = new GeraTabelas().getEntityManager();
 	
-	//Servicos de Usuarios
+/*	//Servicos de Usuarios
 	@Path("/cadastrarImagemPerfil")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -74,7 +75,7 @@ public class ServicosWO {
 
 				byte[] imageByteArray = Base64.decodeBase64(usuario.getFt_perfil());
 
-				// Cria um novo diretÛrio para cada usu·rio e armazena sua
+				// Cria um novo diret√≥rio para cada usu√°rio e armazena sua
 				// imagem de perfil
 				File diretorio = new File("C:/Users/Jeanderson/Desktop/FTP-TESTE/" + usuario.getNome());
 				diretorio.mkdir();
@@ -99,7 +100,7 @@ public class ServicosWO {
 
 			}
 		} catch (NoResultException nre) {
-			System.out.println("Usu·rio n„o encontrado");
+			System.out.println("Usu√°rio n√£o encontrado");
 
 		}
 
@@ -123,14 +124,14 @@ public class ServicosWO {
 				return "USUARIO CADASTRADO COM SUCESSO !!";
 			} else {
 				if (dao.cadastraUsuario(usu) == 0) {
-					System.out.println("CPF J¡ CADASTRADO");
-					return "CPF J¡ CADASTRADO";
+					System.out.println("CPF J√Å CADASTRADO");
+					return "CPF J√Å CADASTRADO";
 				}
 			}
 
 		} catch (MySQLIntegrityConstraintViolationException e) {
 
-			System.out.println(usu.getCpf() + "CPF J¡ CADASTRADO ");
+			System.out.println(usu.getCpf() + "CPF J√Å CADASTRADO ");
 		}
 
 		return "USUARIO CADASTRADO COM SUCESSO !!";
@@ -163,11 +164,11 @@ public class ServicosWO {
 			// JSONObject().put("usuarios",usuarios));
 			result = new Gson().toJson(json);
 
-			System.out.println(" usus = Nome vindo da requisiÁ„o ----- " + nome);
+			System.out.println(" usus = Nome vindo da requisi√ß√£o ----- " + nome);
 
 		} catch (NoResultException nre) {
-			System.out.println("Usu·rio n„o encontrado" + nome);
-			result = "USU¡RIO N√O EXISTE EM NOSSA BASE DE DADOS";
+			System.out.println("Usu√°rio n√£o encontrado" + nome);
+			result = "USU√ÅRIO N√ÉO EXISTE EM NOSSA BASE DE DADOS";
 		}
 
 		return result;
@@ -203,31 +204,31 @@ public class ServicosWO {
 			}
 
 		} catch (NoResultException nre) {
-			System.out.println("Usu·rio n„o encontrado" + pCpf);
-			return "USU¡RIO N√O CADASTRADO NA BASE DE DADOS";
+			System.out.println("Usu√°rio n√£o encontrado" + pCpf);
+			return "USU√ÅRIO N√ÉO CADASTRADO NA BASE DE DADOS";
 		}
 
 	}
-
+*/
 	
-	//Servicos de ocorrencia 
+/*	//Servicos de ocorrencia 
 	@Path("/cadastrarOcorrencia")
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String cadastrarOcorrencia(MDOcorrencia ocorrencia) {
 
-		// PEGAR O ID QUE VIER E PROCURAR UM USUA¡RIO COM ESSE ID
+		// PEGAR O ID QUE VIER E PROCURAR UM USUA√ÅRIO COM ESSE ID
 
-		// System.out.println("ID DO USU¡RIO DA OCORRENCIA
+		// System.out.println("ID DO USU√ÅRIO DA OCORRENCIA
 		// \n"+ocorrencia.getUsuario().getId());
 		MDUsuario usu = ocorrencia.getUsuario();
 
-		System.out.println("id do usu·rio " + usu.getBairro());
+		System.out.println("id do usu√°rio " + usu.getBairro());
 
 		if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 1) {
 
-			System.out.println("OCORR NCIA CADASTRADA COM SUCESSO !!");
+			System.out.println("OCORR√äNCIA CADASTRADA COM SUCESSO !!");
 			return " ";
 		} else {
 			if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 0) {
@@ -236,7 +237,7 @@ public class ServicosWO {
 			}
 		}
 
-		return "OCORR NCIA CADASTRADA COM SUCESSO !!";
+		return "OCORR√äNCIA CADASTRADA COM SUCESSO !!";
 	}
 
 	@Path("/buscarUsuarioOcorrencia/{cpf}")
@@ -252,7 +253,7 @@ public class ServicosWO {
 					.getResultList();
 
 		} catch (NoResultException nre) {
-			System.out.println("Usu·rio n„o encontrado" + cpf);
+			System.out.println("Usu√°rio n√£o encontrado" + cpf);
 
 		}
 		return null;
@@ -277,3 +278,4 @@ public class ServicosWO {
 	
 	}
 }
+*/

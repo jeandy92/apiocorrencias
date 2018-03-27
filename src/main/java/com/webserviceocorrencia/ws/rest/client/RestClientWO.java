@@ -1,6 +1,6 @@
 package com.webserviceocorrencia.ws.rest.client;
 
-import com.webserviceocorrencia.jpa.entidades.MDUsuario;
+import com.webserviceocorrencia.ws.entidades.MDUsuario;
 import com.webserviceocorrencia.ws.rest.modelo.Usuario;
 
 import javax.ws.rs.core.Response;
@@ -20,7 +20,7 @@ public class RestClientWO {
 	
      
 	/*	String urlRestService = "http://localhost:62001/RestWO/services/WebserviceOcorrencia/buscarUsuario";
-		System.out.println("########### Serviço Rest Invovcado:+ ["+urlRestService+"]");
+		System.out.println("########### Serviï¿½o Rest Invovcado:+ ["+urlRestService+"]");
 		
 		
 		Client  client  = Client.create();
@@ -51,8 +51,8 @@ public class RestClientWO {
 	}
 	public void inserirUsuario(){*/
 		
-		String urlRestService = "http://localhost:62001/RestWO/services/WebserviceOcorrencia/cadastrarUsuario";
-		System.out.println("########### Serviço Rest Invovcado:+ ["+urlRestService+"]");
+		String urlRestService = "http://localhost:8080/RestWO/services/WebserviceOcorrencia/cadastrarUsuario";
+		System.out.println("########### Serviï¿½o Rest Invovcado:+ ["+urlRestService+"]");
 		
 		MDUsuario usu  =  new MDUsuario();
 		
