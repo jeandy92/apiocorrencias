@@ -8,8 +8,8 @@
 	<!-- Implementação do JPA, no nosso caso Hibernate -->
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
-	<class>com.webserviceocorrencia.jpa.modelo.MDUsuario</class>
-	<class>com.webserviceocorrencia.jpa.modelo.MDOcorrencia</class>
+	<class>com.webserviceocorrencia.ws.entidades.MDUsuario</class>
+	<class>com.webserviceocorrencia.ws.entidades.MDOcorrencia</class>
 	
 	<properties>
 			<!-- Propriedades JDBC -->
