@@ -16,8 +16,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import org.codehaus.jettison.json.JSONException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -30,11 +28,11 @@ public class OcorrenciaService {
 
     OcorrenciaDAO ocorrenciadao = new OcorrenciaDAO();
 
-    @PersistenceContext
+
     EntityManager manager = new GeraTabelas().getEntityManager();
 
     //Servicos de ocorrencia
-    @Transactional
+
     public String cadastrarOcorrencia(MDOcorrencia ocorrencia) {
 
         // PEGAR O ID QUE VIER E PROCURAR UM USUAÁRIO COM ESSE ID
@@ -59,8 +57,8 @@ public class OcorrenciaService {
         return "OCORRÊNCIA CADASTRADA COM SUCESSO !!";
     }
 
-    @Transactional
-    public List<MDUsuario> buscarUsuarioOcorrencia(String cpf) throws JSONException {
+
+    public List<MDUsuario> buscarUsuarioOcorrencia(String cpf) {
 
         EntityManager manager = new GeraTabelas().getEntityManager();
         try {
@@ -76,8 +74,8 @@ public class OcorrenciaService {
 
     }
 
-    @Transactional
-    public List<MDOcorrencia> listaOcorrencias(String bairro) throws JSONException {
+
+    public List<MDOcorrencia> listaOcorrencias(String bairro) {
 
         String buscaOcorrencia = "select r from SAM_OCORRENCIA r where r.bairro = :bairro";
 

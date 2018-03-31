@@ -38,10 +38,10 @@ public class UsuarioService {
 
     UsuarioDAO dao = new UsuarioDAO();
 
-    @PersistenceContext
+
     EntityManager manager = new GeraTabelas().getEntityManager();
 
-    @Transactional
+
     public String armazenarImagemPerfil(MDUsuario usuario) throws IOException {
 
         EntityManager manager = new GeraTabelas().getEntityManager();
@@ -102,7 +102,6 @@ public class UsuarioService {
 
     }
 
-    @Transactional
     public String cadastrarUsuario(MDUsuario usu) {
 
         System.out.println(usu.getDataDeNascimento());
@@ -127,17 +126,17 @@ public class UsuarioService {
         return "USUARIO CADASTRADO COM SUCESSO !!";
     }
 
-    @Transactional
+
     public String deletarUsuario() {
         return "Deletar";
     }
 
-    @Transactional
+
     public String alterarUsuario() {
         return "Alterar";
     }
 
-    @Transactional
+
     public String buscarUsuario(String nome) throws JSONException {
 
         String result;
@@ -163,7 +162,7 @@ public class UsuarioService {
         return result;
     }
 
-    @Transactional
+
     public String logarUsuario(String pCpf, String pSenha) {
 
         EntityManager manager = new GeraTabelas().getEntityManager();
@@ -184,7 +183,8 @@ public class UsuarioService {
 
             {
                 System.out.println("SENHA INCORRETA!:  " + usuario.getSenha() + "   DIFERENTE:  " + pSenha);
-                return "SENHA INCORRETA!";
+
+                 return "SENHA INCORRETA!";
             }
 
         } catch (NoResultException nre) {

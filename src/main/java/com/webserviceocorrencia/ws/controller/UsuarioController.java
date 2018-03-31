@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @Autowired
-    UsuarioService usuarioService;
+    public UsuarioService usuarioService;
 
     @RequestMapping(value = "/cadastrarUsuario", method = RequestMethod.POST)
     public String cadastrarUsuario(@RequestBody MDUsuario usuario) {
