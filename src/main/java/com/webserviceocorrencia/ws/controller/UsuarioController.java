@@ -6,7 +6,7 @@
 package com.webserviceocorrencia.ws.controller;
 
 import com.webserviceocorrencia.ws.entidades.MDUsuario;
-import com.webserviceocorrencia.ws.rest.servico.UsuarioService;
+import com.webserviceocorrencia.ws.servico.UsuarioService;
 import java.io.IOException;
 import org.codehaus.jettison.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
