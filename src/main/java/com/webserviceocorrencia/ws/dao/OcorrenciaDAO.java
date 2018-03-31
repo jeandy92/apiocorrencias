@@ -5,6 +5,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.webserviceocorrencia.ws.entidades.MDOcorrencia;
+import org.springframework.stereotype.Repository;
+
 
 public class OcorrenciaDAO {
 

@@ -11,6 +11,7 @@ import com.webserviceocorrencia.ws.dao.OcorrenciaDAO;
 import com.webserviceocorrencia.ws.dao.UsuarioDAO;
 import com.webserviceocorrencia.ws.entidades.MDUsuario;
 import com.webserviceocorrencia.ws.repositorio.GeraTabelas;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,177 +19,178 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Jeanderson
  */
 
-@Service 
+@Service
 public class UsuarioService {
 
-        UsuarioDAO dao = new UsuarioDAO();
-	EntityManager manager = new GeraTabelas().getEntityManager();
-	
-        public String armazenarImagemPerfil(MDUsuario usuario) throws IOException {
+    UsuarioDAO dao = new UsuarioDAO();
 
-		EntityManager manager = new GeraTabelas().getEntityManager();
+    @PersistenceContext
+    EntityManager manager = new GeraTabelas().getEntityManager();
 
-		System.out.println("STRING VINDA DO ANDROID " + usuario.getFt_perfil());
+    @Transactional
+    public String armazenarImagemPerfil(MDUsuario usuario) throws IOException {
 
-		String imagemNova = usuario.getFt_perfil();
+        EntityManager manager = new GeraTabelas().getEntityManager();
 
-		usuario = manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class)
-				.setParameter("cpf", usuario.getCpf()).getSingleResult();
+        System.out.println("STRING VINDA DO ANDROID " + usuario.getFt_perfil());
 
-		usuario.setFt_perfil(imagemNova);
+        String imagemNova = usuario.getFt_perfil();
 
-		System.out.println("ID USUARIO " + usuario.getId());
+        usuario = manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class)
+                .setParameter("cpf", usuario.getCpf()).getSingleResult();
 
-		try {
-			if (dao.alterarUsuario(usuario) == 1) {
+        usuario.setFt_perfil(imagemNova);
 
-				System.out.println("USUARIO ALTERADO  COM SUCESSO !!");
+        System.out.println("ID USUARIO " + usuario.getId());
 
-				usuario = manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class)
-						.setParameter("cpf", usuario.getCpf()).getSingleResult();
+        try {
+            if (dao.alterarUsuario(usuario) == 1) {
 
-				// Converting a Base64 String into Image byte array
-				// String stringencoder =
-				// Base64.encodeBase64String(usuario.getFt_perfil().getBytes("UTF-8"));
+                System.out.println("USUARIO ALTERADO  COM SUCESSO !!");
 
-				byte[] imageByteArray = Base64.decodeBase64(usuario.getFt_perfil());
+                usuario = manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class)
+                        .setParameter("cpf", usuario.getCpf()).getSingleResult();
 
-				// Cria um novo diretório para cada usuário e armazena sua
-				// imagem de perfil
-				File diretorio = new File("C:/Users/Jeanderson/Desktop/FTP-TESTE/" + usuario.getNome());
-				diretorio.mkdir();
+                // Converting a Base64 String into Image byte array
+                // String stringencoder =
+                // Base64.encodeBase64String(usuario.getFt_perfil().getBytes("UTF-8"));
 
-				// Write a image byte array into file system
-				FileOutputStream imageOutFile = new FileOutputStream(diretorio + "/" + usuario.getNome() + ".png");
+                byte[] imageByteArray = Base64.decodeBase64(usuario.getFt_perfil());
 
-				imageOutFile.write(imageByteArray);
+                // Cria um novo diretório para cada usuário e armazena sua
+                // imagem de perfil
+                File diretorio = new File("C:/Users/Jeanderson/Desktop/FTP-TESTE/" + usuario.getNome());
+                diretorio.mkdir();
 
-				imageOutFile.flush();
-				imageOutFile.close();
+                // Write a image byte array into file system
+                FileOutputStream imageOutFile = new FileOutputStream(diretorio + "/" + usuario.getNome() + ".png");
 
-				System.out.println("Imagem salva com suceso");
+                imageOutFile.write(imageByteArray);
 
-				return "USUARIO ALTERADO  COM SUCESSO !!";
-			}
+                imageOutFile.flush();
+                imageOutFile.close();
 
-			else {
+                System.out.println("Imagem salva com suceso");
 
-				System.out.println("ERRO AO ALTERAR USUARIO");
-				return "ERRO AO ALTERAR USUARIO";
+                return "USUARIO ALTERADO  COM SUCESSO !!";
+            } else {
 
-			}
-		} catch (NoResultException nre) {
-			System.out.println("Usuário não encontrado");
+                System.out.println("ERRO AO ALTERAR USUARIO");
+                return "ERRO AO ALTERAR USUARIO";
 
-		}
+            }
+        } catch (NoResultException nre) {
+            System.out.println("Usuário não encontrado");
 
-		return "USUARIO CADASTRADO COM SUCESSO !!";
+        }
 
-	}
+        return "USUARIO CADASTRADO COM SUCESSO !!";
+
+    }
+
+    @Transactional
+    public String cadastrarUsuario(MDUsuario usu) {
+
+        System.out.println(usu.getDataDeNascimento());
+
+        try {
+            if (dao.cadastraUsuario(usu) == 1) {
+
+                System.out.println("USUARIO CADASTRADO COM SUCESSO !!");
+                return "USUARIO CADASTRADO COM SUCESSO !!";
+            } else {
+                if (dao.cadastraUsuario(usu) == 0) {
+                    System.out.println("CPF JÁ CADASTRADO");
+                    return "CPF JÁ CADASTRADO";
+                }
+            }
+
+        } catch (MySQLIntegrityConstraintViolationException e) {
+
+            System.out.println(usu.getCpf() + "CPF JÁ CADASTRADO ");
+        }
+
+        return "USUARIO CADASTRADO COM SUCESSO !!";
+    }
+
+    @Transactional
+    public String deletarUsuario() {
+        return "Deletar";
+    }
+
+    @Transactional
+    public String alterarUsuario() {
+        return "Alterar";
+    }
+
+    @Transactional
+    public String buscarUsuario(String nome) throws JSONException {
+
+        String result;
+        EntityManager manager = new GeraTabelas().getEntityManager();
+        try {
+            List<MDUsuario> usuarios = new ArrayList<MDUsuario>();
+
+            usuarios = manager.createNamedQuery("MDUsuario.buscaPorNome", MDUsuario.class)
+                    .setParameter("nome", nome).getResultList();
+
+            JSONArray json = new JSONArray(usuarios);
+            // result= new Gson().toJson( new
+            // JSONObject().put("usuarios",usuarios));
+            result = new Gson().toJson(json);
+
+            System.out.println(" usus = Nome vindo da requisição ----- " + nome);
+
+        } catch (NoResultException nre) {
+            System.out.println("Usuário não encontrado" + nome);
+            result = "USUÁRIO NÃO EXISTE EM NOSSA BASE DE DADOS";
+        }
+
+        return result;
+    }
+
+    @Transactional
+    public String logarUsuario(String pCpf, String pSenha) {
+
+        EntityManager manager = new GeraTabelas().getEntityManager();
+        System.out.println("Logou\n\n");
+        System.out.println("CPF ====" + pCpf + "SENHA:--- " + pSenha);
+
+        try {
+
+            MDUsuario usuario = (MDUsuario) manager.createNamedQuery("MDUsuario.logarUsuario", MDUsuario.class)
+                    .setParameter("vpCpf", pCpf).getSingleResult();
+
+            if (usuario.getSenha().equals(pSenha))
+
+            {
+                System.out.println("SENHA CORRETA!:" + usuario.getSenha());
+                return new Gson().toJson(usuario);
+            } else
+
+            {
+                System.out.println("SENHA INCORRETA!:  " + usuario.getSenha() + "   DIFERENTE:  " + pSenha);
+                return "SENHA INCORRETA!";
+            }
+
+        } catch (NoResultException nre) {
+            System.out.println("Usuário não encontrado" + pCpf);
+            return "USUÁRIO NÃO CADASTRADO NA BASE DE DADOS";
+        }
+
+    }
 
 
-	public String cadastrarUsuario(MDUsuario usu) {
-
-		System.out.println(usu.getDataDeNascimento());
-
-		try {
-			if (dao.cadastraUsuario(usu) == 1) {
-
-				System.out.println("USUARIO CADASTRADO COM SUCESSO !!");
-				return "USUARIO CADASTRADO COM SUCESSO !!";
-			} else {
-				if (dao.cadastraUsuario(usu) == 0) {
-					System.out.println("CPF JÁ CADASTRADO");
-					return "CPF JÁ CADASTRADO";
-				}
-			}
-
-		} catch (MySQLIntegrityConstraintViolationException e) {
-
-			System.out.println(usu.getCpf() + "CPF JÁ CADASTRADO ");
-		}
-
-		return "USUARIO CADASTRADO COM SUCESSO !!";
-	}
-
-	public String deletarUsuario() {
-            return "Deletar";
-	}
-
-	public String alterarUsuario() {
-           return  "Alterar";
-	}
-
-
-	public String buscarUsuario(String nome) throws JSONException {
-
-		String result;
-		EntityManager manager = new GeraTabelas().getEntityManager();
-		try {
-			List<MDUsuario> usuarios = new ArrayList<MDUsuario>();
-
-			usuarios = manager.createNamedQuery("MDUsuario.buscaPorNome", MDUsuario.class)
-					.setParameter("nome", nome).getResultList();
-
-			JSONArray json = new JSONArray(usuarios);
-			// result= new Gson().toJson( new
-			// JSONObject().put("usuarios",usuarios));
-			result = new Gson().toJson(json);
-
-			System.out.println(" usus = Nome vindo da requisição ----- " + nome);
-
-		} catch (NoResultException nre) {
-			System.out.println("Usuário não encontrado" + nome);
-			result = "USUÁRIO NÃO EXISTE EM NOSSA BASE DE DADOS";
-		}
-
-		return result;
-	}
-
-
-	public String logarUsuario( String pCpf,  String pSenha) {
-
-		EntityManager manager = new GeraTabelas().getEntityManager();
-		System.out.println("Logou\n\n");
-		System.out.println("CPF ====" + pCpf + "SENHA:--- " + pSenha);
-
-		try {
-
-			MDUsuario usuario = (MDUsuario) manager.createNamedQuery("MDUsuario.logarUsuario", MDUsuario.class)
-					.setParameter("vpCpf", pCpf).getSingleResult();
-
-			if (usuario.getSenha().equals(pSenha))
-
-			{
-				System.out.println("SENHA CORRETA!:" + usuario.getSenha());
-				return new Gson().toJson(usuario);
-			}
-
-			else
-
-			{
-				System.out.println("SENHA INCORRETA!:  " + usuario.getSenha() + "   DIFERENTE:  " + pSenha);
-				return "SENHA INCORRETA!";
-			}
-
-		} catch (NoResultException nre) {
-			System.out.println("Usuário não encontrado" + pCpf);
-			return "USUÁRIO NÃO CADASTRADO NA BASE DE DADOS";
-		}
-
-	}
-
-        
-
-    
 }

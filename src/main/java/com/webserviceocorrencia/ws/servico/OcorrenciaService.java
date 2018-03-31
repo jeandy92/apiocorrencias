@@ -9,76 +9,83 @@ import com.webserviceocorrencia.ws.dao.OcorrenciaDAO;
 import com.webserviceocorrencia.ws.entidades.MDOcorrencia;
 import com.webserviceocorrencia.ws.entidades.MDUsuario;
 import com.webserviceocorrencia.ws.repositorio.GeraTabelas;
+
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.codehaus.jettison.json.JSONException;
 import org.springframework.stereotype.Service;
 
 
 /**
- *
  * @author Jeanderson
  */
 @Service
 public class OcorrenciaService {
-    
-    
-	OcorrenciaDAO ocorrenciadao = new OcorrenciaDAO();
-	EntityManager manager = new GeraTabelas().getEntityManager();
-    
-    	//Servicos de ocorrencia 
-    
-	public String cadastrarOcorrencia(MDOcorrencia ocorrencia) {
 
-		// PEGAR O ID QUE VIER E PROCURAR UM USUAÁRIO COM ESSE ID
 
-		// System.out.println("ID DO USUÁRIO DA OCORRENCIA
-		// \n"+ocorrencia.getUsuario().getId());
-		MDUsuario usu = ocorrencia.getUsuario();
+    OcorrenciaDAO ocorrenciadao = new OcorrenciaDAO();
 
-		System.out.println("id do usuário " + usu.getBairro());
+    @PersistenceContext
+    EntityManager manager = new GeraTabelas().getEntityManager();
 
-		if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 1) {
+    //Servicos de ocorrencia
+    @Transactional
+    public String cadastrarOcorrencia(MDOcorrencia ocorrencia) {
 
-			System.out.println("OCORRÊNCIA CADASTRADA COM SUCESSO !!");
-			return " ";
-		} else {
-			if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 0) {
-				System.out.println("ERRO AO CADASTRAR OCORRENCIA");
-				return "ERRO AO CADASTRAR OCORRENCIA";
-			}
-		}
+        // PEGAR O ID QUE VIER E PROCURAR UM USUAÁRIO COM ESSE ID
 
-		return "OCORRÊNCIA CADASTRADA COM SUCESSO !!";
-	}
-	
-	public List<MDUsuario> buscarUsuarioOcorrencia(String cpf) throws JSONException {
+        // System.out.println("ID DO USUÁRIO DA OCORRENCIA
+        // \n"+ocorrencia.getUsuario().getId());
+        MDUsuario usu = ocorrencia.getUsuario();
 
-		EntityManager manager = new GeraTabelas().getEntityManager();
-		try {
+        System.out.println("id do usuário " + usu.getBairro());
 
-			return manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class).setParameter("cpf", cpf)
-					.getResultList();
+        if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 1) {
 
-		} catch (NoResultException nre) {
-			System.out.println("Usuário não encontrado" + cpf);
+            System.out.println("OCORRÊNCIA CADASTRADA COM SUCESSO !!");
+            return " ";
+        } else {
+            if (ocorrenciadao.cadastrarOcorrencia(ocorrencia) == 0) {
+                System.out.println("ERRO AO CADASTRAR OCORRENCIA");
+                return "ERRO AO CADASTRAR OCORRENCIA";
+            }
+        }
 
-		}
-		return null;
+        return "OCORRÊNCIA CADASTRADA COM SUCESSO !!";
+    }
 
-	}
-	
-	public List<MDOcorrencia> listaOcorrencias(String bairro) throws JSONException{
-	   
-	String buscaOcorrencia = "select r from SAM_OCORRENCIA r where r.bairro = :bairro";
-	
-	
-	return  manager .createQuery(buscaOcorrencia,MDOcorrencia.class)
-			.setParameter("bairro", bairro)
-			.getResultList();
-	
-	
-	}
-   
+    @Transactional
+    public List<MDUsuario> buscarUsuarioOcorrencia(String cpf) throws JSONException {
+
+        EntityManager manager = new GeraTabelas().getEntityManager();
+        try {
+
+            return manager.createNamedQuery("MDUsuario.buscaPorCpf", MDUsuario.class).setParameter("cpf", cpf)
+                    .getResultList();
+
+        } catch (NoResultException nre) {
+            System.out.println("Usuário não encontrado" + cpf);
+
+        }
+        return null;
+
+    }
+
+    @Transactional
+    public List<MDOcorrencia> listaOcorrencias(String bairro) throws JSONException {
+
+        String buscaOcorrencia = "select r from SAM_OCORRENCIA r where r.bairro = :bairro";
+
+
+        return manager.createQuery(buscaOcorrencia, MDOcorrencia.class)
+                .setParameter("bairro", bairro)
+                .getResultList();
+
+
+    }
+
 }
