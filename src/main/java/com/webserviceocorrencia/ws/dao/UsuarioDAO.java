@@ -8,7 +8,9 @@ import javax.persistence.Persistence;
 import com.google.gson.Gson;
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.webserviceocorrencia.ws.entidades.MDUsuario;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UsuarioDAO {
 	
 	public EntityManager getEnt() {

@@ -17,6 +17,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import org.codehaus.jettison.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 

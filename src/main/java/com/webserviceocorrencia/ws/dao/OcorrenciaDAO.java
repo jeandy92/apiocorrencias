@@ -5,9 +5,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.webserviceocorrencia.ws.entidades.MDOcorrencia;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class OcorrenciaDAO {
 
 	public EntityManager getEnt() {
